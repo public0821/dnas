@@ -8,6 +8,7 @@ import logging
 import readline
 import argparse
 import gettext
+import time
 
 FILENAME = os.path.basename(os.path.realpath(__file__))
 PROGNAME = FILENAME.split('.')[0]
@@ -48,9 +49,10 @@ def setup_file_logger(log_file, verbose):
 def parse_args():
     parser = argparse.ArgumentParser(description=_('Management tool of {}').format(PROGNAME), add_help=False)
     parser.add_argument('-v', required=False, action='store_true', default=False, help="enable debug messages")
+    parser.add_argument('--forever', required=False, action='store_true', default=False, help="do not exit and run forever")
     known_args, unknown_args = parser.parse_known_args()
     # print(known_args, unknown_args, vars(known_args).keys(), sys.argv)
-    for arg in ['-v',]:
+    for arg in ['-v', '--forever']:
         try:
             sys.argv.remove(arg)
         except ValueError:
@@ -63,3 +65,7 @@ if __name__ == '__main__':
     log_file = "{0}/{1}.log".format(CURRENT_DIR, PROGNAME)
     setup_file_logger(log_file, args.v)
     main()
+    if args.forever:
+        while  True:
+            time.sleep(60)
+            # print("I am sleeping ...")
