@@ -11,6 +11,7 @@ class Samba(Command):
         self.add_child(Status(parent=self, name='status'))
         self.add_child(Install(parent=self, name='install'))
         self.add_child(Start(parent=self, name='start'))
+        self.add_child(Restart(parent=self, name='restart'))
         self.add_child(Stop(parent=self, name='stop'))
         self.add_child(Info(parent=self, name='info'))
         self.add_child(Add(parent=self, name='add'))
@@ -53,6 +54,16 @@ class Start(Command):
 
     def execute(self, args):
         SambaService.start()
+
+class Restart(Command):
+    def __init__(self, parent, name=None):
+        super().__init__(parent, name)
+
+    def description(self):
+        return _('Restart Samba')
+
+    def execute(self, args):
+        SambaService.restart()
 
 class Stop(Command):
     def __init__(self, parent, name=None):

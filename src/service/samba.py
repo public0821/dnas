@@ -34,6 +34,14 @@ class SambaService(object):
         shell.system("service samba stop")
 
     @classmethod    
+    def restart(cls):
+        has_samba = cls.has_installed()
+        if not has_samba:
+            print("Samba has not been installed")
+            return
+        shell.system("service samba restart")
+
+    @classmethod    
     def install(cls):
         has_samba = cls.has_installed()
         if has_samba:
