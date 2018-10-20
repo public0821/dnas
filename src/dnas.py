@@ -26,10 +26,7 @@ def main():
     cli = CommandLine(root)
 
     if len(sys.argv) > 1:
-        if cli.execute(' '.join(sys.argv[1:])):
-            sys.exit(0)
-        else:
-            sys.exit(-1)
+        return cli.execute(' '.join(sys.argv[1:]))
 
     cli.start(sys.argv[1:])
 
@@ -64,7 +61,8 @@ if __name__ == '__main__':
     args = parse_args()
     log_file = "{0}/{1}.log".format(CURRENT_DIR, PROGNAME)
     setup_file_logger(log_file, args.v)
-    main()
+    if not main():
+        sys.exit(-1)
     if args.forever:
         while  True:
             time.sleep(60)
