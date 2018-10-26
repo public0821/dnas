@@ -5,7 +5,7 @@ from cmd.samba import Samba
 class RootCommand(Command):
     def __init__(self, name):
         super().__init__(name=name)
-        self.add_child(Test(parent=self, name='test'))
+        # self.add_child(Test(parent=self, name='test'))
         self.add_child(Status(parent=self, name='status'))
         self.add_child(Samba(parent=self, name='samba'))
 

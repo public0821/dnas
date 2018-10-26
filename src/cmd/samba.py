@@ -19,7 +19,7 @@ class Samba(Command):
         self.add_child(Clear(parent=self, name='clear'))
 
     def description(self):
-        return _('Config Samba')
+        return _('Configure Samba')
 
 class Status(Command):
     def __init__(self, parent, name=None):

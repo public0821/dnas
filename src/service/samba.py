@@ -8,9 +8,15 @@ class SambaService(object):
     def status(cls, show_detail=False):
         has_samba = cls.has_installed()
         if not has_samba:
-            return "not installed"
+            if not show_detail:
+                return "not installed"
+            else:
+                print("Samba has not been installed")
+                return
         if show_detail:
-            shell.system("service samba status")
+            # shell.system("service samba status")
+            shell.system("service smbd status")
+            shell.system("service nmbd status")
         else:
             started = shell.check_command("service samba status")
             if not started:
@@ -23,7 +29,10 @@ class SambaService(object):
         if not has_samba:
             print("Samba has not been installed")
             return
-        shell.system("service samba start")
+        # shell.system("service samba start")
+        shell.system("service smbd start")
+        shell.system("service nmbd start")
+
 
     @classmethod    
     def stop(cls):
@@ -31,7 +40,9 @@ class SambaService(object):
         if not has_samba:
             print("Samba has not been installed")
             return
-        shell.system("service samba stop")
+        # shell.system("service samba stop")
+        shell.system("service smbd stop")
+        shell.system("service nmbd stop")
 
     @classmethod    
     def restart(cls):
@@ -39,7 +50,9 @@ class SambaService(object):
         if not has_samba:
             print("Samba has not been installed")
             return
-        shell.system("service samba restart")
+        # shell.system("service samba restart")
+        shell.system("service smbd restart")
+        shell.system("service nmbd restart")
 
     @classmethod    
     def install(cls):
