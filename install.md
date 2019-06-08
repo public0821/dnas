@@ -51,5 +51,5 @@ $ sudo dnas samba restart
 如果需要开机自动启动，可以通过systemctl来设置
 ```
 $ sudo systemctl enable nmbd
-$ sudo systemctl enable nmbd
+$ sudo systemctl enable smbd
 ```
